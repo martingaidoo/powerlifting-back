@@ -1,0 +1,46 @@
+services:
+  app:
+    build: .
+    ports:
+      - '3001:3000' # Mapped to 3001 to avoid conflict with frontend
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+      - DB_NAME=gym_competition
+      - NODE_ENV=production
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - gym-network
+    links:
+      - db
+  
+  db:
+    image: postgres:15-alpine
+    hostname: db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: gym_competition
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - gym-network
+
+networks:
+  gym-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
