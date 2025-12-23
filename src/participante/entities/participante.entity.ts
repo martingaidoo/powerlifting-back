@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
 import { Competencia } from '../../competencia/entities/competencia.entity';
 import { Intento } from '../../intento/entities/intento.entity';
+import { Levantamiento } from '../../levantamiento/entities/levantamiento.entity';
 
 @Entity()
 export class Participante {
@@ -40,6 +41,9 @@ export class Participante {
 
     @OneToMany(() => Intento, (intento) => intento.participante)
     intentos: Intento[];
+
+    @OneToMany(() => Levantamiento, (levantamiento) => levantamiento.participante)
+    levantamientos: Levantamiento[];
 
     @CreateDateColumn()
     createdAt: Date;

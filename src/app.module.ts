@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CompetenciaModule } from './competencia/competencia.module';
 import { ParticipanteModule } from './participante/participante.module';
 import { IntentoModule } from './intento/intento.module';
+import { LevantamientoModule } from './levantamiento/levantamiento.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -29,6 +30,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     CompetenciaModule,
     ParticipanteModule,
     IntentoModule,
+    LevantamientoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
