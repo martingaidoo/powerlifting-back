@@ -6,8 +6,10 @@ import { Intento } from './entities/intento.entity';
 import { IntentoRepository } from './repositories/intento.repository';
 import { PostgresIntentoRepository } from './repositories/postgres-intento.repository';
 
+import { ParticipanteModule } from '../participante/participante.module';
+
 @Module({
-    imports: [TypeOrmModule.forFeature([Intento])],
+    imports: [TypeOrmModule.forFeature([Intento]), ParticipanteModule],
     controllers: [IntentoController],
     providers: [
         IntentoService,

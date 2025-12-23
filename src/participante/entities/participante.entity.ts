@@ -25,6 +25,15 @@ export class Participante {
     @Column()
     competenciaId: number;
 
+    @Column({ default: true })
+    participaSentadilla: boolean;
+
+    @Column({ default: true })
+    participaBanca: boolean;
+
+    @Column({ default: true })
+    participaMuerto: boolean;
+
     @ManyToOne(() => Competencia, (competencia) => competencia.participantes)
     @JoinColumn({ name: 'competenciaId' })
     competencia: Competencia;

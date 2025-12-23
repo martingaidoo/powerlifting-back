@@ -16,5 +16,6 @@ import { PostgresParticipanteRepository } from './repositories/postgres-particip
             useClass: PostgresParticipanteRepository,
         },
     ],
+    exports: [ParticipanteRepository],
 })
 export class ParticipanteModule { }

@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsInt, IsNumber, IsOptional, Min } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, IsNumber, IsOptional, Min, IsBoolean } from 'class-validator';
 
 export class CreateParticipanteDto {
     @IsString()
@@ -27,4 +27,16 @@ export class CreateParticipanteDto {
     @IsInt()
     @IsNotEmpty()
     competenciaId: number;
+
+    @IsBoolean()
+    @IsOptional()
+    participaSentadilla?: boolean;
+
+    @IsBoolean()
+    @IsOptional()
+    participaBanca?: boolean;
+
+    @IsBoolean()
+    @IsOptional()
+    participaMuerto?: boolean;
 }
