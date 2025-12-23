@@ -1,17 +1,16 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { CompetenciaService } from './competencia/services/competencia.service';
-import { ParticipanteService } from './participante/services/participante.service';
-import { LevantamientoService } from './levantamiento/services/levantamiento.service';
-import { TipoMovimiento } from './intento/entities/intento.entity';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = require("@nestjs/core");
+const app_module_1 = require("./app.module");
+const competencia_service_1 = require("./competencia/services/competencia.service");
+const participante_service_1 = require("./participante/services/participante.service");
+const levantamiento_service_1 = require("./levantamiento/services/levantamiento.service");
+const intento_entity_1 = require("./intento/entities/intento.entity");
 async function bootstrap() {
-    const app = await NestFactory.createApplicationContext(AppModule);
-
-    const competenciaService = app.get(CompetenciaService);
-    const participanteService = app.get(ParticipanteService);
-    const levantamientoService = app.get(LevantamientoService);
-
+    const app = await core_1.NestFactory.createApplicationContext(app_module_1.AppModule);
+    const competenciaService = app.get(competencia_service_1.CompetenciaService);
+    const participanteService = app.get(participante_service_1.ParticipanteService);
+    const levantamientoService = app.get(levantamiento_service_1.LevantamientoService);
     console.log('--- Creating Competition ---');
     const competencia = await competenciaService.create({
         nombre: 'Torneo Iniciación 2024',
@@ -20,20 +19,17 @@ async function bootstrap() {
         fase: 1
     });
     console.log('Competition created:', competencia.id);
-
     const disciplines = [
-        { s: true, b: true, m: true }, // Todos
-        { s: true, b: false, m: false }, // Solo Sentadilla
-        { s: false, b: true, m: false }, // Solo Banca
-        { s: false, b: false, m: true }, // Solo Muerto
-        { s: true, b: true, m: false }, // Sentadilla + Banca
-        { s: false, b: true, m: true }, // Banca + Muerto
+        { s: true, b: true, m: true },
+        { s: true, b: false, m: false },
+        { s: false, b: true, m: false },
+        { s: false, b: false, m: true },
+        { s: true, b: true, m: false },
+        { s: false, b: true, m: true },
     ];
-
     console.log('--- Creating Participants and Levantamientos ---');
     for (let i = 1; i <= 20; i++) {
         const discipline = disciplines[Math.floor(Math.random() * disciplines.length)];
-
         const participante = await participanteService.create({
             nombre: `Participante`,
             apellido: `${i}`,
@@ -45,23 +41,18 @@ async function bootstrap() {
             participaBanca: discipline.b,
             participaMuerto: discipline.m,
         });
-
         console.log(`Created Participante ${i} (ID: ${participante.id}) [S:${discipline.s} B:${discipline.b} M:${discipline.m}]`);
-
         const movimientos = [
-            { tipo: TipoMovimiento.SENTADILLA, active: discipline.s },
-            { tipo: TipoMovimiento.BANCA, active: discipline.b },
-            { tipo: TipoMovimiento.MUERTO, active: discipline.m },
+            { tipo: intento_entity_1.TipoMovimiento.SENTADILLA, active: discipline.s },
+            { tipo: intento_entity_1.TipoMovimiento.BANCA, active: discipline.b },
+            { tipo: intento_entity_1.TipoMovimiento.MUERTO, active: discipline.m },
         ];
-
         for (const mov of movimientos) {
-            if (!mov.active) continue;
-
-            // Generate initial weight (multiple of 2.5)
+            if (!mov.active)
+                continue;
             let w1 = Math.floor((Math.random() * (200 - 60) + 60) / 2.5) * 2.5;
             let w2 = w1 + 2.5 + (Math.random() > 0.5 ? 2.5 : 0);
             let w3 = w2 + 2.5;
-
             await levantamientoService.create({
                 participanteId: participante.id,
                 tipo: mov.tipo,
@@ -72,9 +63,8 @@ async function bootstrap() {
             console.log(`Created Levantamiento for ${mov.tipo}: ${w1}, ${w2}, ${w3}`);
         }
     }
-
     console.log('--- Seeding Completed ---');
     await app.close();
 }
-
 bootstrap();
+//# sourceMappingURL=seed.js.map
