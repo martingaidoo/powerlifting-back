@@ -4,5 +4,6 @@ export declare class LevantamientoController {
     private readonly levantamientoService;
     constructor(levantamientoService: LevantamientoService);
     create(createLevantamientoDto: CreateLevantamientoDto): Promise<import("../entities/levantamiento.entity").Levantamiento>;
+    findAll(competenciaId?: string): Promise<import("../entities/levantamiento.entity").Levantamiento[]>;
     findByParticipante(id: number): Promise<import("../entities/levantamiento.entity").Levantamiento[]>;
 }

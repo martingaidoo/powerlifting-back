@@ -5,4 +5,5 @@ export declare abstract class IntentoRepository {
     abstract findByParticipante(participanteId: number): Promise<Intento[]>;
     abstract findOne(id: number): Promise<Intento | null>;
     abstract findByParticipanteAndTipoAndNumero(participanteId: number, tipo: TipoMovimiento, numero: number): Promise<Intento | null>;
+    abstract findAll(competenciaId?: number): Promise<Intento[]>;
 }

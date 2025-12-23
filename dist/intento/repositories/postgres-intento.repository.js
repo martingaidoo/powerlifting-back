@@ -41,6 +41,14 @@ let PostgresIntentoRepository = class PostgresIntentoRepository extends intento_
     async findByParticipanteAndTipoAndNumero(participanteId, tipo, numero) {
         return this.typeOrmRepository.findOne({ where: { participanteId, tipo, numero } });
     }
+    async findAll(competenciaId) {
+        const query = this.typeOrmRepository.createQueryBuilder('intento');
+        if (competenciaId) {
+            query.innerJoin('intento.participante', 'participante');
+            query.where('participante.competenciaId = :competenciaId', { competenciaId });
+        }
+        return query.getMany();
+    }
 };
 exports.PostgresIntentoRepository = PostgresIntentoRepository;
 exports.PostgresIntentoRepository = PostgresIntentoRepository = __decorate([

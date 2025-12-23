@@ -6,5 +6,6 @@ export declare class IntentoController {
     constructor(intentoService: IntentoService);
     create(createIntentoDto: CreateIntentoDto): Promise<import("../entities/intento.entity").Intento>;
     update(id: number, updateIntentoDto: UpdateIntentoDto): Promise<import("../entities/intento.entity").Intento>;
+    findAll(competenciaId?: string): Promise<import("../entities/intento.entity").Intento[]>;
     findByParticipante(participanteId: number): Promise<import("../entities/intento.entity").Intento[]>;
 }

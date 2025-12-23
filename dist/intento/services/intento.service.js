@@ -46,6 +46,9 @@ let IntentoService = class IntentoService {
         }
         return updatedIntento;
     }
+    async findAll(competenciaId) {
+        return this.intentoRepository.findAll(competenciaId);
+    }
     async findByParticipante(participanteId) {
         return this.intentoRepository.findByParticipante(participanteId);
     }

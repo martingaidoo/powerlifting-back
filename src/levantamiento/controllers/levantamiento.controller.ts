@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { LevantamientoService } from '../services/levantamiento.service';
 import { CreateLevantamientoDto } from '../dto/create-levantamiento.dto';
 
@@ -9,6 +9,11 @@ export class LevantamientoController {
     @Post()
     create(@Body() createLevantamientoDto: CreateLevantamientoDto) {
         return this.levantamientoService.create(createLevantamientoDto);
+    }
+
+    @Get()
+    findAll(@Query('competenciaId') competenciaId?: string) {
+        return this.levantamientoService.findAll(competenciaId ? +competenciaId : undefined);
     }
 
     @Get('participante/:id')

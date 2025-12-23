@@ -42,6 +42,17 @@ export class LevantamientoService {
         }
     }
 
+    async findAll(competenciaId?: number): Promise<Levantamiento[]> {
+        const query = this.levantamientoRepository.createQueryBuilder('levantamiento');
+
+        if (competenciaId) {
+            query.innerJoin('levantamiento.participante', 'participante');
+            query.where('participante.competenciaId = :competenciaId', { competenciaId });
+        }
+
+        return query.getMany();
+    }
+
     async findByParticipante(participanteId: number): Promise<Levantamiento[]> {
         return this.levantamientoRepository.find({
             where: { participanteId },

@@ -9,6 +9,7 @@ export declare class IntentoService {
     constructor(intentoRepository: IntentoRepository, participanteRepository: ParticipanteRepository);
     create(createIntentoDto: CreateIntentoDto): Promise<Intento>;
     update(id: number, updateIntentoDto: UpdateIntentoDto): Promise<Intento>;
+    findAll(competenciaId?: number): Promise<Intento[]>;
     findByParticipante(participanteId: number): Promise<Intento[]>;
     private validateWeightIncrement;
     private validateParticipanteDiscipline;

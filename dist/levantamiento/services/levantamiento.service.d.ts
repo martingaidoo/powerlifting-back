@@ -6,6 +6,7 @@ export declare class LevantamientoService {
     constructor(levantamientoRepository: Repository<Levantamiento>);
     create(createLevantamientoDto: CreateLevantamientoDto): Promise<Levantamiento>;
     private validateWeights;
+    findAll(competenciaId?: number): Promise<Levantamiento[]>;
     findByParticipante(participanteId: number): Promise<Levantamiento[]>;
     findOne(id: string): Promise<Levantamiento>;
 }

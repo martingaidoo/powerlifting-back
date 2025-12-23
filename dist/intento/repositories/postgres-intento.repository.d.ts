@@ -9,4 +9,5 @@ export declare class PostgresIntentoRepository extends IntentoRepository {
     findByParticipante(participanteId: number): Promise<Intento[]>;
     findOne(id: number): Promise<Intento | null>;
     findByParticipanteAndTipoAndNumero(participanteId: number, tipo: TipoMovimiento, numero: number): Promise<Intento | null>;
+    findAll(competenciaId?: number): Promise<Intento[]>;
 }

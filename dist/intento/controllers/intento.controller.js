@@ -28,6 +28,9 @@ let IntentoController = class IntentoController {
     async update(id, updateIntentoDto) {
         return this.intentoService.update(id, updateIntentoDto);
     }
+    async findAll(competenciaId) {
+        return this.intentoService.findAll(competenciaId ? +competenciaId : undefined);
+    }
     async findByParticipante(participanteId) {
         return this.intentoService.findByParticipante(participanteId);
     }
@@ -48,6 +51,13 @@ __decorate([
     __metadata("design:paramtypes", [Number, update_intento_dto_1.UpdateIntentoDto]),
     __metadata("design:returntype", Promise)
 ], IntentoController.prototype, "update", null);
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('competenciaId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], IntentoController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('participante/:participanteId'),
     __param(0, (0, common_1.Param)('participanteId', common_1.ParseIntPipe)),

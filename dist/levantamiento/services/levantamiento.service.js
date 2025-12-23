@@ -47,6 +47,14 @@ let LevantamientoService = class LevantamientoService {
             throw new common_1.BadRequestException('Weights must be multiples of 2.5');
         }
     }
+    async findAll(competenciaId) {
+        const query = this.levantamientoRepository.createQueryBuilder('levantamiento');
+        if (competenciaId) {
+            query.innerJoin('levantamiento.participante', 'participante');
+            query.where('participante.competenciaId = :competenciaId', { competenciaId });
+        }
+        return query.getMany();
+    }
     async findByParticipante(participanteId) {
         return this.levantamientoRepository.find({
             where: { participanteId },

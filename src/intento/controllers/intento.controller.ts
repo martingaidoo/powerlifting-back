@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { IntentoService } from '../services/intento.service';
 import { CreateIntentoDto } from '../dtos/create-intento.dto';
 import { UpdateIntentoDto } from '../dtos/update-intento.dto';
@@ -18,6 +18,11 @@ export class IntentoController {
         @Body() updateIntentoDto: UpdateIntentoDto,
     ) {
         return this.intentoService.update(id, updateIntentoDto);
+    }
+
+    @Get()
+    async findAll(@Query('competenciaId') competenciaId?: string) {
+        return this.intentoService.findAll(competenciaId ? +competenciaId : undefined);
     }
 
     @Get('participante/:participanteId')

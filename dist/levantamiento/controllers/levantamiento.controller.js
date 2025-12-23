@@ -24,6 +24,9 @@ let LevantamientoController = class LevantamientoController {
     create(createLevantamientoDto) {
         return this.levantamientoService.create(createLevantamientoDto);
     }
+    findAll(competenciaId) {
+        return this.levantamientoService.findAll(competenciaId ? +competenciaId : undefined);
+    }
     findByParticipante(id) {
         return this.levantamientoService.findByParticipante(id);
     }
@@ -36,6 +39,13 @@ __decorate([
     __metadata("design:paramtypes", [create_levantamiento_dto_1.CreateLevantamientoDto]),
     __metadata("design:returntype", void 0)
 ], LevantamientoController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('competenciaId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], LevantamientoController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('participante/:id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

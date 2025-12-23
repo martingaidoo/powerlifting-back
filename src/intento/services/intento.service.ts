@@ -61,6 +61,10 @@ export class IntentoService {
         return updatedIntento;
     }
 
+    async findAll(competenciaId?: number): Promise<Intento[]> {
+        return this.intentoRepository.findAll(competenciaId);
+    }
+
     async findByParticipante(participanteId: number): Promise<Intento[]> {
         return this.intentoRepository.findByParticipante(participanteId);
     }
