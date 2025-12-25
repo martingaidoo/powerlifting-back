@@ -31,14 +31,26 @@ async function bootstrap() {
     ];
 
     console.log('--- Creating Participants and Levantamientos ---');
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 13; i++) {
         const discipline = disciplines[Math.floor(Math.random() * disciplines.length)];
+
+        // Categorias de peso masculino: -66, -74, -83, -93, -105, -120
+        const weightCategories = [
+            { min: 55.0, max: 66.0 },
+            { min: 66.1, max: 74.0 },
+            { min: 74.1, max: 83.0 },
+            { min: 83.1, max: 93.0 },
+            { min: 93.1, max: 105.0 },
+            { min: 105.1, max: 120.0 },
+        ];
+        const category = weightCategories[Math.floor(Math.random() * weightCategories.length)];
+        const peso = Math.floor((Math.random() * (category.max - category.min) + category.min) * 10) / 10;
 
         const participante = await participanteService.create({
             nombre: `Participante`,
             apellido: `${i}`,
             edad: Math.floor(Math.random() * (40 - 18 + 1)) + 18,
-            peso: Number((Math.random() * (120 - 50) + 50).toFixed(1)),
+            peso: peso,
             altura: Number((Math.random() * (190 - 150) + 150).toFixed(0)),
             competenciaId: competencia.id,
             participaSentadilla: discipline.s,
