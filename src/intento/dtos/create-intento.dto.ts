@@ -1,5 +1,5 @@
-import { IsEnum, IsNumber, IsPositive, Max, Min } from 'class-validator';
-import { TipoMovimiento } from '../entities/intento.entity';
+import { IsEnum, IsNumber, IsOptional, IsPositive, Max, Min } from 'class-validator';
+import { ResultadoIntento, TipoMovimiento } from '../entities/intento.entity';
 
 export class CreateIntentoDto {
     @IsNumber()
@@ -17,4 +17,8 @@ export class CreateIntentoDto {
     @IsNumber()
     @IsPositive()
     peso: number;
+
+    @IsEnum(ResultadoIntento)
+    @IsOptional()
+    resultado?: ResultadoIntento;
 }
