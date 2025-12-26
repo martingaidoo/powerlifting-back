@@ -116,4 +116,12 @@ export class IntentoService {
             }
         }
     }
+
+    async delete(id: number): Promise<void> {
+        const intento = await this.intentoRepository.findOne(id);
+        if (!intento) {
+            throw new NotFoundException('Intento no encontrado');
+        }
+        await this.intentoRepository.delete(id);
+    }
 }

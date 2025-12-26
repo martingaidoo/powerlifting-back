@@ -39,10 +39,16 @@ export class PostgresIntentoRepository extends IntentoRepository {
         const query = this.typeOrmRepository.createQueryBuilder('intento');
 
         if (competenciaId) {
-            query.innerJoin('intento.participante', 'participante');
+            query.innerJoinAndSelect('intento.participante', 'participante');
             query.where('participante.competenciaId = :competenciaId', { competenciaId });
+        } else {
+            query.innerJoinAndSelect('intento.participante', 'participante');
         }
 
         return query.getMany();
+    }
+
+    async delete(id: number): Promise<void> {
+        await this.typeOrmRepository.delete(id);
     }
 }

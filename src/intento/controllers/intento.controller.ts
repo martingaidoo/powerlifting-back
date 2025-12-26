@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { IntentoService } from '../services/intento.service';
 import { CreateIntentoDto } from '../dtos/create-intento.dto';
 import { UpdateIntentoDto } from '../dtos/update-intento.dto';
@@ -30,5 +30,10 @@ export class IntentoController {
         @Param('participanteId', ParseIntPipe) participanteId: number,
     ) {
         return this.intentoService.findByParticipante(participanteId);
+    }
+
+    @Delete(':id')
+    async delete(@Param('id', ParseIntPipe) id: number) {
+        return this.intentoService.delete(id);
     }
 }
